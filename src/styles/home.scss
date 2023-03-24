@@ -1,0 +1,42 @@
+.wrapper-home {
+    height: 100%;
+
+    .home-title {
+        font-size: 4rem;
+        font-weight: 800;
+        line-height: 2;
+        padding-bottom: 30px;
+    }
+
+    .form-create-project {
+        // box-shadow: 1px 1px 2px 1px rgba(0, 0, 0, 0.1);
+        border: 1px solid rgba(0, 0, 0, 0.1);
+        border-radius: 4px;
+        transition: 0.3s;
+        padding: 20px;
+
+        .form-create-project-content {
+            display: flex;
+            flex-direction: column;
+            gap: 20px;
+        }
+
+        .form-create-project-group-btn {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 12px;
+
+            padding-top: 10px;
+
+            &.disable {
+                pointer-events: none;
+                opacity: 0.5;
+            }
+        }
+    }
+
+    .form-create-project:hover {
+        box-shadow: 0 4px 6px 0 rgba(0, 0, 0, 0.2);
+    }
+}

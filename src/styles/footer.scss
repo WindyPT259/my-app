@@ -1,0 +1,88 @@
+.wrapper-footer {
+    position: fixed;
+    bottom: 0;
+    width: 100%;
+    background: #090909;
+    overflow-x: hidden;
+
+    .footer-container {
+        padding: 20px var(--default-layout-horizontal-spacer) 0;
+        max-width: var(--default-layout-max-width);
+        margin: auto;
+    }
+
+    .footer-content {
+        display: flex;
+        justify-content: space-between;
+        gap: 48px;
+        margin: 0 auto;
+        color: #fff;
+    }
+
+    .footer_content_left_title {
+        font-weight: 400;
+        font-size: 1.6rem;
+        line-height: 1.5;
+        padding-bottom: 16px;
+    }
+
+    .footer_content_left_icon {
+        display: flex;
+        padding-bottom: 16px;
+        gap: 30px;
+
+        img {
+            width: 24px;
+            height: 24px;
+        }
+    }
+
+    .label_menu_unActive {
+        cursor: pointer;
+        font-weight: 500;
+        font-size: 20px;
+        text-transform: uppercase;
+        color: #ffffff;
+        text-decoration: none;
+    }
+
+    .footer_content_right {
+        ul {
+            display: flex;
+            gap: 48px;
+            padding-left: 0;
+
+            li {
+                list-style: none;
+
+                a {
+                    font-size: 1.6rem;
+                    line-height: 3;
+                    cursor: pointer;
+                    text-transform: uppercase;
+                    text-decoration: none;
+                    color: #ffffff;
+                }
+
+                .active {
+                    font-weight: 800;
+                    font-size: 20px;
+                    text-transform: uppercase;
+                    color: #ffffff;
+                    text-decoration: none;
+                    cursor: pointer;
+                    line-height: 88px;
+                }
+            }
+        }
+    }
+
+    .footer_content_line {
+        border-top: 1px solid rgba(255, 255, 255, 0.8);
+        color: #fff;
+        text-align: end;
+        padding-top: 16px;
+        padding-bottom: 25px;
+        font-size: 1.6rem;
+    }
+}

@@ -1,0 +1,132 @@
+:root {
+    --primary: #40a1ff;
+    --black: #000;
+    --white: #fff;
+    --color-btn-hover: #2a90f5;
+    --text-color: #152327;
+    --font-family: "Nunito Sans", sans-serif;
+
+    //default layout
+    --default-layout-header-height: 90px;
+    --default-layout-max-width: 1680px;
+    --default-layout-horizontal-spacer: 24px;
+}
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+html {
+    font-size: 62.5%;
+}
+
+body {
+    margin: 0;
+    font-family: var(--font-family) !important;
+    font-size: 1.6rem;
+    line-height: 1.5;
+    color: var(--text-color);
+    font-style: normal;
+    overflow-y: overlay;
+    text-rendering: optimizeSpeed;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+}
+
+button,
+input,
+[tabindex] {
+    outline: none;
+    border: none;
+}
+
+a {
+    color: var(--text-color);
+    text-decoration: none;
+}
+
+//Font embeded
+@font-face {
+    font-family: 'Nunito Sans';
+    src: url('../assets/fonts/NunitoSans-Regular.ttf');
+    font-style: normal;
+}
+
+@font-face {
+    font-family: 'Nunito Sans';
+    src: url('../assets/fonts/NunitoSans-SemiBold.ttf');
+    font-weight: 600;
+}
+
+@font-face {
+    font-family: 'Nunito Sans';
+    src: url('../assets/fonts/NunitoSans-Bold.ttf');
+    font-weight: 700;
+}
+
+@font-face {
+    font-family: 'Nunito Sans';
+    src: url('../assets/fonts/NunitoSans-Italic.ttf');
+    font-style: italic;
+}
+
+//Toastyfy
+.Toastify {
+    .Toastify__toast-container {
+        width: auto;
+        padding: 0;
+
+        &.Toastify__toast-container--bottom-left {
+            bottom: 230px;
+            left: 24px;
+        }
+
+        .Toastify__toast {
+            font-family: "Nunito Sans";
+            font-style: normal;
+            font-weight: 400;
+            font-size: 16px;
+            padding: 16px 24px;
+            margin-bottom: 0;
+            margin-top: 24px;
+            min-height: auto !important;
+            background: "#042D41" !important;
+
+            .Toastify__toast-body {
+                padding: 0;
+            }
+
+            .Toastify__close-button {
+                opacity: 100;
+                margin-left: 24px;
+                align-self: auto;
+
+                svg {
+                    width: 14px;
+                    height: 14px;
+                    background-image: url("../assets/images/menu-close.png");
+                    background-size: contain;
+
+                    path {
+                        display: none;
+                    }
+                }
+            }
+        }
+
+        .Toastify__toast-theme--dark {
+            background: #042d41;
+
+            .Toastify__progress-bar-theme--dark {
+                background: #dae6f1;
+            }
+        }
+
+        .undo-btn {
+            text-decoration: underline;
+            padding: 0 0 0 24px;
+        }
+    }
+}
