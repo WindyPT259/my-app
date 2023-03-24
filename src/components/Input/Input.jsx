@@ -3,7 +3,7 @@ import { Form } from 'react-bootstrap';
 
 function Input(props) {
     let {
-        groupClassName,
+        className,
         // label
         label,
         labelClassName,
@@ -18,7 +18,7 @@ function Input(props) {
     } = props;
 
     // Form group className
-    groupClassName = 'form-group' + (groupClassName ? ' ' + groupClassName : '');
+    const groupClassName = 'form-group' + (className ? ' ' + className : '');
 
     // Label required
     labelRequired = labelRequired ? (
@@ -35,14 +35,15 @@ function Input(props) {
             )}
 
             <div className="control-group">
-                {iconStart && <div className="icon-start">{iconStart}</div>}
-                {iconEnd && <div className="icon-end">{iconEnd}</div>}
-
+                {iconStart && <span className="icon-start">{iconStart}</span>}
                 <Form.Control
                     {...field}
                     {...inputProps}
                     isInvalid={fieldState?.invalid}
                 />
+                {iconEnd && <span className="icon-end">{iconEnd}</span>}
+
+
             </div>
 
             {fieldState?.error && (

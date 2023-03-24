@@ -1,0 +1,118 @@
+//Login
+.wrapper-login {
+    height: 100%;
+    width: 400px;
+    padding-top: 20px;
+
+    .login-header {
+        display: flex;
+        align-content: center;
+        flex-direction: column;
+        align-items: center;
+        flex-wrap: wrap;
+
+        .login-header-title {
+            font-size: 4rem;
+            font-weight: 800;
+            line-height: 1.5;
+            padding: 20px 0;
+            text-transform: uppercase;
+            color: var(--primary);
+        }
+
+        .login-header-error {
+            font-size: 1.6rem;
+            line-height: 1.2;
+            font-weight: 400;
+            color: red;
+            padding-bottom: 16px;
+        }
+    }
+
+    .login-body {
+        .login-form {
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            gap: 16px;
+
+            .login-flex,
+            .login-footer {
+                display: flex;
+                flex-direction: row;
+                align-items: center;
+                justify-content: space-between;
+            }
+
+            .login-flex {
+                .login-remember-me {}
+
+                .login-forgot-password {
+                    padding: 0;
+                }
+
+            }
+
+            .login-footer {
+                justify-content: center;
+                font-size: 1.6rem;
+                font-weight: 600;
+                line-height: 1.2;
+
+                .wrapper-btn {
+                    padding: 0px;
+
+                    .title {
+                        font-size: 1.6rem;
+                        font-weight: 600;
+                        line-height: 1.2;
+                        color: var(--primary);
+                    }
+                }
+            }
+
+            .btn-login {
+                padding-top: 10px;
+
+            }
+
+
+            .control-group {
+                position: relative;
+
+                .icon-end {
+                    position: absolute;
+                    top: 50%;
+                    right: 6px;
+                    transform: translateY(-50%);
+                    margin-left: 6px;
+                }
+
+                .eye-icon {
+                    display: block;
+                    width: 20px;
+                    height: 20px;
+                }
+            }
+
+
+            .form-label,
+            .form-check-label,
+            .login-forgot-password {
+                font-size: 1.6rem;
+                font-weight: 600;
+                line-height: 1.2;
+
+            }
+
+            .login-forgot-password {
+                color: var(--primary);
+            }
+
+
+            .text-danger {
+                color: red;
+            }
+        }
+    }
+}

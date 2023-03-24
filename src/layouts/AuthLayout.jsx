@@ -1,12 +1,10 @@
 import PropTypes from 'prop-types';
 import '../styles/layout.scss';
-import Header from '../components/Header/Header';
 import Footer from '../components/Footer/Footer';
 
-function DefaultLayout({ children }) {
+function AuthLayout({ children }) {
   return (
     <div className='wrapper'>
-      <Header />
       <div className='container'>
         <div className='content'>{children}</div>
       </div>
@@ -15,7 +13,7 @@ function DefaultLayout({ children }) {
 
   );
 };
-DefaultLayout.propTypes = {
+AuthLayout.propTypes = {
   children: PropTypes.node.isRequired,
 };
-export default DefaultLayout;
+export default AuthLayout;

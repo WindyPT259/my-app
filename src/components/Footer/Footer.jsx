@@ -1,5 +1,5 @@
 import React from "react";
-import icon from "../../assets/icon/icon";
+import icon from "../../assets/icon";
 import '../../styles/footer.scss'
 import { Link } from "react-router-dom";
 function Footer() {

@@ -149,7 +149,7 @@
         input.form-control {
             border: 1px solid #d9d6d6;
             border-radius: 4px;
-            padding: 10px 8px;
+            padding: 10px;
             font-weight: 400;
             font-size: 1.4rem;
             line-height: 1.2;
@@ -176,6 +176,11 @@
             }
         }
 
+        .icon-input {
+            display: inline-block;
+            width: 24px;
+            text-align: center;
+        }
 
     }
 
@@ -196,8 +201,6 @@
         .form-check-label {
             font-size: 1.8rem;
             font-weight: 600;
-
-
         }
     }
 }

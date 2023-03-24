@@ -68,7 +68,6 @@ const Home = () => {
                             name="projectName"
                             control={control}
                             placeholder="Enter project name"
-                            required
                         />
                         <SelectField
                             control={control}
