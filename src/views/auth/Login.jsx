@@ -8,10 +8,11 @@ import '../../styles/login.scss'
 const Login = () => {
     const [showPassword, setShowPassword] = useState(false);
     const [loginError, setLoginError] = useState(null);
+    const [isSubmitted, setIsSubmitted] = useState(false);
 
     const defaultValues = { emailLogin: '', passwordLogin: '', isRememberMe: false, };
     const { control, handleSubmit, errors } = useForm({ defaultValues });
-    const handleLogin = (data) => {
+    const handleLogin = async data => {
         console.log(data);
     }
     const handleShowPassword = () => setShowPassword(!showPassword)

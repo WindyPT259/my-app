@@ -1,6 +1,8 @@
 import { useState } from "react";
 import { useForm } from "react-hook-form";
 import FileSaver from "file-saver";
+import * as yup from 'yup';
+import { yupResolver } from '@hookform/resolvers/yup';
 
 import homeServices from "../../apiServices/homeServices";
 import Button from '../../components/Button'
@@ -8,7 +10,9 @@ import { SelectField, InputField, CheckBoxField } from '../../components/FormFie
 import { Toast } from "../../utils";
 import '../../styles/home.scss'
 const Home = () => {
-    const [isCreateProject, setIsCreateProject] = useState(false)
+    const [projectName, setProjectName] = useState('')
+    const [loading, setLoading] = useState(true)
+    const [disableSelect, setDisableSelect] = useState(false)
 
     const programLanguagesOptions = [
         { label: '.Net Core', value: '.Net Core' },
@@ -21,41 +25,79 @@ const Home = () => {
         { label: 'MongoDB', value: 'MongoDB' },
     ];
 
-    const defaultValues = { projectName: '', programmingLanguage: '.Net Core', programmingDatabase: 'SQL Server', };
+    const defaultValues = { projectName: '', programmingLanguage: '.Net Core', programmingDatabase: 'SQL Server', unitTest: false };
 
-    const { control, handleSubmit, errors } = useForm({ defaultValues });
+    const validationForm = yup.object().shape({
+        projectName: yup
+            .string()
+            .required('Please enter project name'),
+        programmingLanguage: yup
+            .string()
+            .required('Please select a programming language'),
+        programmingDatabase: yup
+            .string()
+            .required('Please select a programming database'),
+    });
+
+    const { control, formState, handleSubmit, setError, setValue, errors } = useForm({ defaultValues, resolver: yupResolver(validationForm) });
 
     const handleCreateSampleProject = async formValues => {
         try {
-            // const response = await homeServices.createProject(formValues);
-            if (true) {
-                console.log('data1', formValues);
+            setLoading(true)
+            const response = await homeServices.createProject(formValues);
+            if (response.data.succeeded) {
                 Toast('Create project successful!')
-                setIsCreateProject(true);
+                setProjectName(formValues.ProjectName);
+                setLoading(false)
             }
             else {
                 Toast('Create project failed!')
-                setIsCreateProject(false);
+                setProjectName('');
+                setLoading(true)
             }
 
         } catch (error) {
-            setIsCreateProject(false);
+            setProjectName('');
+            Toast('Create project failed!')
+            if (error.response.data.message === 'Error: Duplicated project name.') {
+                setError('ProjectName', { message: "Duplicated project name." });
+            }
+            else {
+                setCommonError(error.response.data.message)
+            }
+            setLoading(true)
+        }
+        finally {
+            setLoading(false);
         }
     };
 
     const handleDownloadSampleProject = async () => {
         try {
-            const response = await homeServices.downloadProject();
-            const blob = new Blob([response.data], { type: response.headers['content-type'] });
-            const fileName = response.headers['content-disposition'].split('filename=')[1];
-            FileSaver.saveAs(blob, fileName);
+            setLoading(true)
+            const response = await homeServices.downloadProject(
+                { projectName }, { responseType: 'blob' }
+            );
+            const blob = new Blob([response.data], { type: 'application/octet-stream' });
+            FileSaver.saveAs(blob, `${projectName}.zip`)
             Toast('Download successful!')
         } catch (error) {
-            console.log(error);
+            setLoading(true)
             Toast('Download failed!')
+        }
+        finally {
+            setLoading(false);
         }
     }
 
+    const sendData = (option) => {
+        if (option.languageTypeId === 1 || option.languageTypeId === 3) {
+            setDisableSelect(true);
+            setValue('DBMS_TypeId', '4')
+        }
+        else
+            setDisableSelect(false);
+    }
 
     const homeJSX = (
         <div className="wrapper-home" >
@@ -76,6 +118,7 @@ const Home = () => {
                             placeholder="Choose a language...."
                             options={programLanguagesOptions}
                             error={errors}
+                            sendData={sendData}
                         />
                         <SelectField
                             control={control}
@@ -83,20 +126,30 @@ const Home = () => {
                             name="programmingDatabase"
                             placeholder="Choose a database..."
                             options={programDBOptions}
+                            disable={disableSelect}
                             error={errors}
                         />
                         <CheckBoxField
                             control={control}
                             label="Unit Test"
                             name="unitTest"
+                            disable={disableSelect}
                         />
                     </div>
                     <div className="form-create-project-group-btn">
-                        <Button primary type="submit">Create project</Button>
-                        <Button primary type="button" onClick={handleDownloadSampleProject} disable={!isCreateProject}>Dowload Project</Button>
+                        <Button primary type="submit" disable={formState.isSubmitting}>Create project</Button>
+                        <Button primary type="button" onClick={handleDownloadSampleProject} disable={!Boolean(projectName)}>Dowload Project</Button>
                     </div>
                 </form>
             </div>
+            {loading && (
+                <div className="wrap-management-body">
+                    <div className="loading">
+                        <div className="loader"></div>
+                    </div>
+                    <div className="loading-shadow"></div>
+                </div>
+            )}
         </div>
     );
 

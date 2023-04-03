@@ -1,11 +1,23 @@
 .wrapper-home {
     height: 100%;
+    max-width: 600px;
 
-    .home-title {
-        font-size: 4rem;
-        font-weight: 800;
-        line-height: 2.5;
-        padding-bottom: 30px;
+    .wrapper-home-title {
+        text-align: center;
+
+        .home-title {
+            font-size: 4rem;
+            font-weight: 800;
+            line-height: 2;
+        }
+
+        .home-error {
+            color: #ef3737;
+            padding: 5px 0;
+            font-weight: 600;
+            font-size: 1.4rem;
+            line-height: 1.3;
+        }
     }
 
     .form-create-project {
@@ -14,6 +26,7 @@
         border-radius: 4px;
         transition: 0.3s;
         padding: 20px;
+        margin-top: 30px;
 
         .form-create-project-content {
             display: flex;

@@ -13,6 +13,7 @@ export function CheckBoxField(props) {
     groupLabelClassName,
     label,
     labelClassName,
+    disable,
     ...inputProps
   } = props;
   const {
@@ -22,14 +23,14 @@ export function CheckBoxField(props) {
 
   return (
     <Form.Group className="form-group">
-      {groupLabel && (<Form.Label>{groupLabel}</Form.Label>)}
+      {groupLabel && (<Form.Label for="checkbox_id">{groupLabel}</Form.Label>)}
       <Form.Check
         name={name}
         label={label}
         value={value}
         checked={value !== undefined ? value === thisValue : thisValue === true}
-        className={`${className || ''}${invalid ? ' is-invalid' : ''
-          }`}
+        className={`${className || ''}${invalid ? ' is-invalid' : ''}${disable ? ' disable' : ''}`}
+        id="checkbox_id"
         onChange={onChange}
         onBlur={onBlur}
         {...inputProps}

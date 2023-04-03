@@ -1,6 +1,7 @@
 import { Form } from 'react-bootstrap';
 import { useController } from 'react-hook-form';
 import Select from 'react-select';
+import { useState } from 'react';
 
 import { convertToTextForSearch } from '../../utils';
 import '../../styles/formField.scss'
@@ -13,6 +14,8 @@ export function SelectField(props) {
         labelClassName,
         placeholder,
         options,
+        disable,
+        sendData,
         onChange: onChangeProp,
         ...selectProps
     } = props;
@@ -22,15 +25,19 @@ export function SelectField(props) {
         fieldState: { error }
     } = useController({ name, control })
 
-    const selectedOption = options.find(option => option.value === value) || null;
+    const [selectedOption, setSelectedOption] = useState(options.find(option => option.value === value) || null)
 
     const handleSelectOptionChange = selectedOption => {
-        const selectedValue = selectedOption ? selectedOption.value : selectedOption;//check selectoption
+        const selectedValue = selectedOption ? selectedOption.value : selectedOption
         onChangeProp
             ? onChangeProp({
                 target: { name, value: selectedValue }
             })
             : onChange(selectedValue);
+        if (sendData) {
+            sendData(selectedOption);
+        }
+        setSelectedOption(selectedOption)
     };
 
     //Search find value in selectoptions
@@ -54,13 +61,13 @@ export function SelectField(props) {
                 value={selectedOption}
                 filterOption={filterOption}
                 isSearchable={true}
-                noOptionsMessage={() => 'Không có'}
+                noOptionsMessage={() => 'No results'}
                 onChange={handleSelectOptionChange}
                 {...selectProps}
                 ref={ref}
                 options={options}
                 placeholder={placeholder || ''}
-                className={`react-select-container ${error ? ' is-invalid' : ''}`}
+                className={`react-select-container${disable ? ' disable' : ''}${error ? ' is-invalid' : ''}`}
                 classNamePrefix="react-select"
             />
             {error && (
